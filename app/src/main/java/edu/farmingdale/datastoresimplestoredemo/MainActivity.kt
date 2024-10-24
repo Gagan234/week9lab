@@ -72,9 +72,12 @@ fun DataStoreDemo(modifier: Modifier) {
     Column (modifier = Modifier.padding(50.dp)) {
         Text("Values = ${appPrefs.value.userName}, " +
                 "${appPrefs.value.highScore}, ${appPrefs.value.darkMode}")
+
         Button(onClick = {
             coroutineScope.launch {
                 store.saveUsername("flygirl")
+                store.saveTheme(true)
+                store.saveHighScore(100)
             }
 
         }) {
