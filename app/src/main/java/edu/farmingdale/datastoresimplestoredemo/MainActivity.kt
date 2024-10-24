@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -66,6 +67,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DataStoreDemo(modifier: Modifier) {
+    var rdname by remember {
+        mutuableStateOf("")
+    }
     val store = AppStorage(LocalContext.current)
     val appPrefs = store.appPreferenceFlow.collectAsState(AppPreferences())
     val coroutineScope = rememberCoroutineScope()
@@ -77,7 +81,7 @@ fun DataStoreDemo(modifier: Modifier) {
             coroutineScope.launch {
                 store.saveUsername("flygirl")
                 store.saveTheme(true)
-                store.saveHighScore(100)
+                store.SaveHighScore(100)
             }
 
         }) {
@@ -85,6 +89,7 @@ fun DataStoreDemo(modifier: Modifier) {
         }
     }
 }
+
 
 // ToDo 1: Modify the App to store a high score and a dark mode preference
 // ToDo 2: Modify the APP to store the username through a text field
